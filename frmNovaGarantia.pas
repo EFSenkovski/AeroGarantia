@@ -230,7 +230,6 @@ begin
     begin
       EditProDes.Text := QryAux.FieldByName('PRO_DES').AsString;
       EditPreco.Value := QryAux.FieldByName('PRO_VEN').AsFloat;
-
     end;
   end;
 end;

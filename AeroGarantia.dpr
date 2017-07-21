@@ -17,7 +17,8 @@ uses
   frmFornecedorProduto in 'frmFornecedorProduto.pas' {F_FornecedorProduto},
   frmConsultaNota in 'frmConsultaNota.pas' {F_ConsultaNota},
   frmConsultaGarantia in 'frmConsultaGarantia.pas' {F_ConsultaGarantia},
-  frmPedidosGarantia in 'frmPedidosGarantia.pas' {F_PedidosGarantia};
+  frmPedidosGarantia in 'frmPedidosGarantia.pas' {F_PedidosGarantia},
+  frmConsultaPartesGarantia in 'frmConsultaPartesGarantia.pas' {F_ConsultaPartesGarantia};
 
 {$R *.res}
 

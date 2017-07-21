@@ -5,7 +5,7 @@ object F_DMMAIN: TF_DMMAIN
   Width = 439
   object FDConnection: TFDConnection
     Params.Strings = (
-      'Database=localhost:/aero32db/fririos/aerosml.gdb'
+      'Database=localhost:/aero32db/eletrosul/aerosml.gdb'
       'User_Name=sysdba'
       'Password=13031526'
       'DriverID=FB')

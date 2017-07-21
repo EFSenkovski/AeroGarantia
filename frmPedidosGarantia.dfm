@@ -10,10 +10,12 @@ object F_PedidosGarantia: TF_PedidosGarantia
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poMainFormCenter
   PrintScale = poPrintToFit
   OnClose = FormClose
+  OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -195,7 +197,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
       Align = alClient
       TabOrder = 0
       object TBPedSimples: TTabSheet
-        Caption = 'Pedido Simples (Destinat'#225'rio '#218'nico)'
+        Caption = 'Pedido Simples '
         object GrbProd: TGroupBox
           Left = 0
           Top = 155
@@ -273,6 +275,9 @@ object F_PedidosGarantia: TF_PedidosGarantia
               Width = 75
               Height = 21
               TabOrder = 0
+              OnDblClick = EditProCodDblClick
+              OnExit = EditProCodExit
+              OnKeyPress = EditProCodKeyPress
             end
             object EditProDes: TEdit
               Tag = 2
@@ -312,6 +317,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
               Height = 21
               DisplayFormat = ' ,0.00;-,0.00'
               TabOrder = 4
+              OnExit = EditQtdeExit
             end
             object EditPreco: TCurrencyEdit
               Left = 663
@@ -361,6 +367,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
                 F3EAC057FAF1D9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 7
+              OnClick = BtnAddProClick
             end
             object BtnExcPro: TBitBtn
               Left = 589
@@ -397,6 +404,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
                 6ADB5C6ADB808BE3A4ACEBE4E6F9FFFFFFFFFFFFFFFFFFFFFFFF}
               TabOrder = 8
               TabStop = False
+              OnClick = BtnExcProClick
             end
           end
           object Panel6: TPanel
@@ -413,12 +421,19 @@ object F_PedidosGarantia: TF_PedidosGarantia
               Width = 856
               Height = 237
               Align = alClient
+              DataSource = DsProdutos
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 0
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
               TitleFont.Height = -11
               TitleFont.Name = 'Tahoma'
-              TitleFont.Style = []
+              TitleFont.Style = [fsBold]
             end
           end
         end
@@ -484,7 +499,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
           end
           object EditCliCod: TEdit
             Left = 89
-            Top = 38
+            Top = 39
             Width = 74
             Height = 21
             Font.Charset = DEFAULT_CHARSET
@@ -493,7 +508,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 0
+            TabOrder = 1
             OnDblClick = EditCliCodDblClick
             OnExit = EditCliCodExit
             OnKeyPress = EditCliCodKeyPress
@@ -512,7 +527,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Style = []
             ParentFont = False
             ReadOnly = True
-            TabOrder = 1
+            TabOrder = 2
           end
           object EditOpeDes: TEdit
             Tag = 2
@@ -528,7 +543,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Style = []
             ParentFont = False
             ReadOnly = True
-            TabOrder = 2
+            TabOrder = 4
           end
           object EditOpeCod: TEdit
             Left = 9
@@ -541,7 +556,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 5
             OnDblClick = EditOpeCodDblClick
             OnExit = EditOpeCodExit
             OnKeyPress = EditOpeCodKeyPress
@@ -557,7 +572,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 0
             OnDblClick = EditGarCodDblClick
             OnExit = EditGarCodExit
             OnKeyPress = EditGarCodKeyPress
@@ -576,7 +591,22 @@ object F_PedidosGarantia: TF_PedidosGarantia
             NumGlyphs = 2
             ParentFont = False
             ReadOnly = True
-            TabOrder = 5
+            TabOrder = 3
+          end
+          object BtnCDados: TBitBtn
+            Left = 586
+            Top = 83
+            Width = 109
+            Height = 25
+            Caption = 'Confirmar Dados'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 6
+            OnClick = BtnCDadosClick
           end
         end
         object GrbTotais: TGroupBox
@@ -626,9 +656,9 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object CurrencyEdit1: TCurrencyEdit
+          object EditPedTot: TCurrencyEdit
             Tag = 2
-            Left = 728
+            Left = 729
             Top = 35
             Width = 121
             Height = 24
@@ -638,11 +668,12 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 0
           end
           object EditQtdeTot: TCurrencyEdit
             Tag = 2
-            Left = 601
+            Left = 602
             Top = 35
             Width = 121
             Height = 24
@@ -653,11 +684,12 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 1
           end
           object EditNumItens: TCurrencyEdit
             Tag = 2
-            Left = 474
+            Left = 475
             Top = 35
             Width = 121
             Height = 24
@@ -668,6 +700,7 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 2
           end
         end
@@ -690,6 +723,20 @@ object F_PedidosGarantia: TF_PedidosGarantia
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
+          end
+          object LbPed: TLabel
+            Left = 279
+            Top = 8
+            Width = 155
+            Height = 19
+            Caption = 'Pedido Confirmado'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 8863233
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Visible = False
           end
           object BtnNova: TBitBtn
             Left = 3
@@ -753,5 +800,59 @@ object F_PedidosGarantia: TF_PedidosGarantia
   object QryAux: TFDQuery
     Connection = F_DMMAIN.FDConnection
     Left = 736
+  end
+  object CdsProdutos: TClientDataSet
+    PersistDataPacket.Data = {
+      9E0000009619E0BD0100000018000000060000000000030000009E000750524F
+      5F434F440100490000000100055749445448020002000D000750524F5F444553
+      01004900000001000557494454480200020032000750524F5F554E4901004900
+      000001000557494454480200020002000750524F5F5154440800040000000000
+      0750524F5F50524508000400000000000750524F5F544F540800040000000000
+      0000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 39
+    Top = 332
+    object CdsProdutosPRO_COD: TStringField
+      DisplayLabel = 'Produto'
+      FieldName = 'PRO_COD'
+      Size = 13
+    end
+    object CdsProdutosPRO_DES: TStringField
+      DisplayLabel = 'Descri'#231#227'o'
+      FieldName = 'PRO_DES'
+      Size = 50
+    end
+    object CdsProdutosPRO_UNI: TStringField
+      DisplayLabel = 'UN'
+      FieldName = 'PRO_UNI'
+      Size = 2
+    end
+    object CdsProdutosPRO_QTD: TFloatField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'PRO_QTD'
+      DisplayFormat = '###,##0.00'
+    end
+    object CdsProdutosPRO_PRE: TFloatField
+      DisplayLabel = 'Pre'#231'o'
+      FieldName = 'PRO_PRE'
+      currency = True
+    end
+    object CdsProdutosPRO_TOT: TFloatField
+      DisplayLabel = 'Total'
+      FieldName = 'PRO_TOT'
+      currency = True
+    end
+  end
+  object DsProdutos: TDataSource
+    DataSet = CdsProdutos
+    Left = 111
+    Top = 334
+  end
+  object QryAux2: TFDQuery
+    Connection = F_DMMAIN.FDConnection
+    Left = 680
+    Top = 8
   end
 end

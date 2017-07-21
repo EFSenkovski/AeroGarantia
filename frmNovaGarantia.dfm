@@ -38,7 +38,7 @@ object F_NovaGarantia: TF_NovaGarantia
       Left = 0
       Top = 0
       Width = 291
-      Height = 19
+      Height = 41
       Align = alLeft
       Caption = '  Controle de Garantias do AeroSML'
       Color = 8863233
@@ -50,6 +50,7 @@ object F_NovaGarantia: TF_NovaGarantia
       ParentColor = False
       ParentFont = False
       Layout = tlCenter
+      ExplicitHeight = 19
     end
   end
   object Panel2: TPanel
